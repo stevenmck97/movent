@@ -16,12 +16,7 @@ const MovieList = () => {
     <div>
       <ul>
         {movies.map((movie) => {
-          return (
-            <MovieCard title={movie.title} poster={movie.poster_path} />
-            // <div key={movie.id}>
-            //   <li key={movie.id}>{movie.title}</li>
-            // </div>
-          );
+          return <MovieCard title={movie.title} poster={movie.poster_path} />;
         })}
       </ul>
     </div>
