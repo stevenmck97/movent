@@ -67,3 +67,15 @@ export const getMovieDetails = (id) => {
     throw error;
   }
 };
+
+export const getSimilarMovies = (id) => {
+  try {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+    )
+      .then((res) => res.json())
+      .then((json) => json.results);
+  } catch (error) {
+    throw error;
+  }
+};
