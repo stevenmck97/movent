@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMovieDetails, getSimilarMovies } from "../api/tmdb";
+import {
+  getMovieDetails,
+  getMovieReviews,
+  getSimilarMovies,
+} from "../api/tmdb";
 import MovieCard from "../components/MovieCard";
 import Box from "@mui/material/Box";
 import { roundToOneDec } from "../utils/voteRound";
@@ -9,6 +13,7 @@ import { roundToOneDec } from "../utils/voteRound";
 const MovieDetail = () => {
   const [details, setDetails] = useState({});
   const [similar, setSimilar] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const { title, poster_path, overview, genres, vote_average } = details;
 
   const { id } = useParams();
@@ -17,9 +22,10 @@ const MovieDetail = () => {
   useEffect(() => {
     getMovieDetails(id).then((movie) => setDetails(movie));
     getSimilarMovies(id).then((movies) => setSimilar(movies));
+    getMovieReviews(id).then((reviews) => setReviews(reviews));
   }, [id]);
   //   console.log(details);
-  console.log(similar);
+  console.log(reviews);
 
   return (
     <div>
@@ -57,6 +63,24 @@ const MovieDetail = () => {
           </div>
         );
       })}
+      <table>
+        {reviews.map((review) => {
+          return (
+            <div>
+              <thead>
+                <tr>
+                  <th>{review.author}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{review.content}</td>
+                </tr>
+              </tbody>
+            </div>
+          );
+        })}
+      </table>
     </div>
   );
 };
