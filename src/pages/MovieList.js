@@ -45,7 +45,14 @@ const MovieList = () => {
       </select>
       <ul className={styles.layout}>
         {movies.map((movie) => {
-          return <MovieCard title={movie.title} poster={movie.poster_path} />;
+          return (
+            <MovieCard
+              id={movie.id}
+              title={movie.title}
+              poster={movie.poster_path}
+              rating={movie.vote_average}
+            />
+          );
         })}
       </ul>
     </div>

@@ -57,3 +57,13 @@ export const getTopRatedTv = () => {
     throw error;
   }
 };
+
+export const getMovieDetails = (id) => {
+  try {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+    ).then((res) => res.json());
+  } catch (error) {
+    throw error;
+  }
+};
