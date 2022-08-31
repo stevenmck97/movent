@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { getLatestMovies } from "../api/tmdb";
+import { getPopularMovies } from "../api/tmdb";
 import MovieCard from "../components/MovieCard";
+import styles from "./MovieList.module.css";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    getLatestMovies().then((movieData) => {
+    getPopularMovies().then((movieData) => {
       setMovies([...movieData]);
     });
   }, []);
@@ -14,7 +15,7 @@ const MovieList = () => {
 
   return (
     <div>
-      <ul>
+      <ul className={styles.layout}>
         {movies.map((movie) => {
           return <MovieCard title={movie.title} poster={movie.poster_path} />;
         })}
