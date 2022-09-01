@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { getPopularTvShows, getTopRatedTvShows } from "../api/tmdb";
 import TvShowCard from "../components/TvShowCard.js";
-import styles from "./MovieList.module.css";
+import styles from "./List.module.css";
 
 const TvList = () => {
+  //filter search, filter by genre
+
   const [tvShows, setTvShows] = useState([]);
   const [listChoice, setListChoice] = useState(getPopularTvShows);
 

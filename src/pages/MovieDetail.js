@@ -12,16 +12,14 @@ import Box from "@mui/material/Box";
 import { roundToOneDec } from "../utils/voteRound";
 import PersonCard from "../components/PersonCard";
 
-const MovieDetail = () => {
+const MovieDetail = ({ faveMovies, setFaveMovies }) => {
   const [details, setDetails] = useState({});
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [people, setPeople] = useState({ cast: [] });
-  //   const [loading, setLoading] = useState(false);
   const { title, poster_path, overview, genres, vote_average } = details;
 
   const { id } = useParams();
-  //   console.log(id);
 
   useEffect(() => {
     getMovieDetails(id).then((movie) => setDetails(movie)); //put everything in use effect into function?
@@ -31,7 +29,11 @@ const MovieDetail = () => {
     window.scrollTo(0, 0);
   }, [id]);
   //   console.log(details);
-  console.log(people);
+
+  const handleFaveClick = () => {
+    setFaveMovies([...faveMovies, details]);
+    // setFaveMovies((prev) => [...prev, details]);
+  };
 
   return (
     <div>
@@ -49,6 +51,7 @@ const MovieDetail = () => {
         {title ? title : <p>Title not found</p>} {roundToOneDec(vote_average)}
       </h2>
       <p>{overview}</p>
+      <button onClick={handleFaveClick}>Add to Favourites</button>
       <ul>
         {genres ? (
           genres.map((genre) => {

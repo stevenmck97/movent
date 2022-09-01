@@ -5,7 +5,7 @@ import {
   getUpcomingMovies,
 } from "../api/tmdb";
 import MovieCard from "../components/MovieCard";
-import styles from "./MovieList.module.css";
+import styles from "./List.module.css";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
