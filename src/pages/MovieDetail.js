@@ -31,9 +31,14 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
   //   console.log(details);
 
   const handleFaveClick = () => {
-    setFaveMovies([...faveMovies, details]);
-    // setFaveMovies((prev) => [...prev, details]);
+    if (!faveMovies.find((obj) => obj.id === details.id)) {
+      setFaveMovies([...faveMovies, details]);
+    } else return;
+
+    // setFaveMovies([...faveMovies, details]);
   };
+
+  console.log(faveMovies);
 
   return (
     <div>
