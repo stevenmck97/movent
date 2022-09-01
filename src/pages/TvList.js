@@ -36,7 +36,6 @@ const TvList = () => {
       <select name="list-select" id="list-select" onClick={handleListChoice}>
         <option value="popular">Popular</option>
         <option value="top_rated">Top Rated</option>
-        <option value="upcoming">Upcoming</option>
       </select>
       <ul className={styles.layout}>
         {tvShows.map((tvShow) => {

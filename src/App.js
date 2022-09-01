@@ -6,15 +6,20 @@ import TvDetail from "./pages/TvDetails";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { useState } from "react";
 import FavouriteList from "./pages/FavouriteList";
+import Search from "./components/Search";
 
 function App() {
   const [faveMovies, setFaveMovies] = useState([]);
   const [faveTvShows, setFaveTvShows] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  console.log(searchQuery);
 
   return (
     <div className="App">
       <h1>Welcome to MovEnt!</h1>
 
+      <Search setSearchQuery={setSearchQuery} />
       <BrowserRouter>
         <Link to="/">
           <p>Return to Home</p>
