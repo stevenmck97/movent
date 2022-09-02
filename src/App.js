@@ -12,8 +12,6 @@ function App() {
   const [faveMovies, setFaveMovies] = useState([]);
   const [faveTvShows, setFaveTvShows] = useState([]);
 
-  // console.log(searchQuery);
-
   return (
     <div className="App">
       <h1>Welcome to MovEnt!</h1>
