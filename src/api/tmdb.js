@@ -1,7 +1,7 @@
-export const getPopularMovies = async (page) => {
+export const getPopularMovies = async () => {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&`
     );
     const json = await res.json();
     return json.results;

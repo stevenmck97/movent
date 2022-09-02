@@ -14,7 +14,6 @@ const TvList = () => {
       setTvShows([...tvShowData]);
     });
   }, [listChoice]);
-  console.log(tvShows);
 
   const handleListChoice = (e) => {
     e.preventDefault();

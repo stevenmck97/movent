@@ -38,8 +38,6 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
     // setFaveMovies([...faveMovies, details]);
   };
 
-  console.log(faveMovies);
-
   return (
     <div>
       <Box

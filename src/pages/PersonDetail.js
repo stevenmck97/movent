@@ -14,8 +14,6 @@ const PersonDetail = () => {
     getPersonCredits(id).then((credits) => setCredits(credits));
   }, [id]);
 
-  console.log(credits);
-
   return (
     <div>
       <h2>{person.name}</h2>

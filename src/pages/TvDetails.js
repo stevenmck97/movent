@@ -30,8 +30,7 @@ const TvDetail = () => {
     getTvShowActors(id).then((actors) => setPeople(actors));
     window.scrollTo(0, 0);
   }, [id]);
-  //   console.log(details);
-  console.log(people);
+  //   console.log(details)
 
   return (
     <div>

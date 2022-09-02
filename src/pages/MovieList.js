@@ -16,7 +16,6 @@ const MovieList = () => {
       setMovies([...movieData]);
     });
   }, [listChoice]);
-  console.log(movies);
 
   const handleListChoice = (e) => {
     e.preventDefault();
