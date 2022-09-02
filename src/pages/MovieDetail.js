@@ -58,8 +58,14 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
         {title ? title : <p>Title not found</p>} {roundToOneDec(vote_average)}
       </h2>
       <p>{overview}</p>
-      <button onClick={handleFaveClick}>Add to Favourites</button>
-      <button onClick={handleRemoveClick}>Remove from Favourites</button>
+      {faveMovies.find((obj) => obj.id === details.id) ? (
+        <button onClick={handleRemoveClick}>Remove from Faves</button>
+      ) : (
+        <button onClick={handleFaveClick}>Add to Faves</button>
+      )}
+      {/* <button onClick={handleFaveClick}>Add to Favourites</button>
+      <button onClick={handleRemoveClick}>Remove from Favourites</button> */}
+
       <ul>
         {genres ? (
           genres.map((genre) => {
