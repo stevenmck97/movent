@@ -43,7 +43,15 @@ function App() {
             }
           />
           <Route path="/tv" element={<TvList />} />
-          <Route path="/tv/:id" element={<TvDetail />} />
+          <Route
+            path="/tv/:id"
+            element={
+              <TvDetail
+                faveTvShows={faveTvShows}
+                setFaveTvShows={setFaveTvShows}
+              />
+            }
+          />
           <Route path="/person/:id" element={<PersonDetail />} />
           <Route
             path="/favourites"

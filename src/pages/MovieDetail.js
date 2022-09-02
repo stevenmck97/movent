@@ -38,6 +38,10 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
     // setFaveMovies([...faveMovies, details]);
   };
 
+  const handleRemoveClick = () => {
+    setFaveMovies(faveMovies.filter((obj) => obj.id !== details.id));
+  };
+
   return (
     <div>
       <Box
@@ -55,6 +59,7 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
       </h2>
       <p>{overview}</p>
       <button onClick={handleFaveClick}>Add to Favourites</button>
+      <button onClick={handleRemoveClick}>Remove from Favourites</button>
       <ul>
         {genres ? (
           genres.map((genre) => {

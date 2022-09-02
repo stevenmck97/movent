@@ -49,7 +49,7 @@ const FavouriteList = ({
             return (
               <TvShowCard
                 id={show.id}
-                title={show.name}
+                name={show.name}
                 poster={show.poster_path}
                 rating={show.vote_average}
               />

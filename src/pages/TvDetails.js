@@ -12,7 +12,7 @@ import Box from "@mui/material/Box";
 import { roundToOneDec } from "../utils/voteRound";
 import PersonCard from "../components/PersonCard";
 
-const TvDetail = () => {
+const TvDetail = ({ faveTvShows, setFaveTvShows }) => {
   const [details, setDetails] = useState({});
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -21,7 +21,6 @@ const TvDetail = () => {
   const { name, poster_path, overview, genres, vote_average } = details;
 
   const { id } = useParams();
-  //   console.log(id);
 
   useEffect(() => {
     getTvShowDetails(id).then((tvShow) => setDetails(tvShow)); //put everything in use effect into function?
@@ -30,7 +29,18 @@ const TvDetail = () => {
     getTvShowActors(id).then((actors) => setPeople(actors));
     window.scrollTo(0, 0);
   }, [id]);
-  //   console.log(details)
+
+  const handleFaveClick = () => {
+    if (!faveTvShows.find((obj) => obj.id === details.id)) {
+      setFaveTvShows([...faveTvShows, details]);
+    } else return;
+
+    // setFaveMovies([...faveMovies, details]);
+  };
+
+  const handleRemoveClick = () => {
+    setFaveTvShows(faveTvShows.filter((obj) => obj.id !== details.id));
+  };
 
   return (
     <div>
@@ -48,6 +58,8 @@ const TvDetail = () => {
         {name ? name : <p>Title not found</p>} {roundToOneDec(vote_average)}
       </h2>
       <p>{overview}</p>
+      <button onClick={handleFaveClick}>Add to Favourites</button>
+      <button onClick={handleRemoveClick}>Remove from Favourites</button>
       <ul>
         {genres ? (
           genres.map((genre) => {
