@@ -73,10 +73,10 @@ export const getMovieActors = async (id) => {
   // .then((json) => json.cast);
 };
 
-export const getPopularTvShows = async () => {
+export const getPopularTvShows = async (genres) => {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&with_genres=${genres}&page=1`
     );
     const json = await res.json();
     return json.results;
@@ -85,10 +85,10 @@ export const getPopularTvShows = async () => {
   }
 };
 
-export const getTopRatedTvShows = async () => {
+export const getTopRatedTvShows = async (genres) => {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&with_genres=${genres}&page=1`
     );
     const json = await res.json();
     return json.results;

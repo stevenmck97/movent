@@ -12,7 +12,7 @@ const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [listChoice, setListChoice] = useState(getPopularMovies);
   const [movieGenreList, setMovieGenreList] = useState([]);
-  const [genreChoice, setGenreChoice] = useState([]);
+  const [movieGenreChoice, setMovieGenreChoice] = useState([]);
 
   useEffect(() => {
     listChoice.then((movieData) => {
@@ -47,8 +47,12 @@ const MovieList = () => {
   const handleGenreChoice = (e) => {
     e.preventDefault();
     const genreId = e.target.value;
-    setGenreChoice([...genreChoice, genreId]);
-    setListChoice(getPopularMovies(genreChoice));
+    setMovieGenreChoice([...movieGenreChoice, genreId]);
+    setListChoice(
+      getPopularMovies(movieGenreChoice) ||
+        getTopRatedMovies(movieGenreChoice) ||
+        getUpcomingMovies(movieGenreChoice)
+    );
   };
 
   // console.log(genreChoice);
