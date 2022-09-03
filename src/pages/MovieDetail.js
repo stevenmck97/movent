@@ -63,9 +63,6 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
       ) : (
         <button onClick={handleFaveClick}>Add to Faves</button>
       )}
-      {/* <button onClick={handleFaveClick}>Add to Favourites</button>
-      <button onClick={handleRemoveClick}>Remove from Favourites</button> */}
-
       <ul>
         {genres ? (
           genres.map((genre) => {

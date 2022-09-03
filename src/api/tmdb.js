@@ -1,7 +1,7 @@
-export const getPopularMovies = async () => {
+export const getPopularMovies = async (genres) => {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&with_genres=${genres}&sort_by=popularity.desc&include_adult=false&include_video=false`
     );
     const json = await res.json();
     return json.results;
@@ -10,10 +10,10 @@ export const getPopularMovies = async () => {
   }
 };
 
-export const getUpcomingMovies = async () => {
+export const getUpcomingMovies = async (genres) => {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&with_genres=${genres}&page=1`
     );
     const json = await res.json();
     return json.results;
@@ -22,10 +22,10 @@ export const getUpcomingMovies = async () => {
   }
 };
 
-export const getTopRatedMovies = async () => {
+export const getTopRatedMovies = async (genres) => {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&with_genres=${genres}&page=1`
     );
     const json = await res.json();
     return json.results;
