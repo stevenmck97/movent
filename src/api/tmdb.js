@@ -162,3 +162,27 @@ export const searchContent = async (query) => {
     throw error;
   }
 };
+
+export const getMovieGenres = async () => {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+    );
+    const json = await res.json();
+    return json.genres;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTvGenres = async () => {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/genre/tv/list?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+    );
+    const json = await res.json();
+    return json.genres;
+  } catch (error) {
+    throw error;
+  }
+};
