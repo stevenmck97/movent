@@ -24,7 +24,7 @@ const MovieList = () => {
     });
   }, [listChoice]);
 
-  console.log();
+  console.log(movies);
 
   const handleListChoice = (e) => {
     e.preventDefault();

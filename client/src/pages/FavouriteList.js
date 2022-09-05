@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import TvShowCard from "../components/TvShowCard";
+import { getFavouritesList } from "../api/server";
+
+/*
+In the database, separate the favourites list into two lists, one for movies and one for tv shows.
+Set movie state to movie db collection and tv state to tv db collection.
+*/
 
 const FavouriteList = ({
   faveMovies,
@@ -9,6 +15,18 @@ const FavouriteList = ({
   setFaveTvShows,
 }) => {
   const [currentList, setCurrentList] = useState([]);
+  const [dbFaveMovies, setDbFaveMovies] = useState([]);
+
+  useEffect(() => {
+    const getFavourites = async () => {
+      const data = await getFavouritesList();
+      const movies = data.filter((obj) => obj.favourite.movie);
+      setFaveMovies(movies);
+    };
+    getFavourites();
+  }, [setFaveMovies]);
+
+  console.log(faveMovies);
 
   const handleListClick = (e) => {
     e.preventDefault();
@@ -33,25 +51,24 @@ const FavouriteList = ({
       <button onClick={handleListClick} value="tv">
         TV Shows
       </button>
-
       {currentList === faveMovies
-        ? faveMovies.map((movie) => {
+        ? faveMovies.map((item) => {
             return (
               <MovieCard
-                id={movie.id}
-                title={movie.title}
-                poster={movie.poster_path}
-                rating={movie.vote_average}
+                id={item.favourite.movie.id}
+                title={item.favourite.movie.title}
+                poster={item.favourite.movie.poster_path}
+                rating={item.favourite.movie.vote_average}
               />
             );
           })
-        : faveTvShows.map((show) => {
+        : faveTvShows.map((item) => {
             return (
               <TvShowCard
-                id={show.id}
-                name={show.name}
-                poster={show.poster_path}
-                rating={show.vote_average}
+                id={item.favourite.tv.id}
+                name={item.favourite.tv.name}
+                poster={item.favourite.tv.poster_path}
+                rating={item.favourite.tv.vote_average}
               />
             );
           })}

@@ -12,7 +12,7 @@ exports.favourites_list = function (req, res, next) {
 exports.favourite_create = function (req, res, next) {
   //might need to be array
   const favourite = new Favourites({
-    favourite: req.body,
+    favourite: { movie: req.body },
   });
 
   favourite.save(function (err) {

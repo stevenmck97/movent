@@ -11,6 +11,7 @@ export const getFavouritesList = async () => {
 };
 
 export const addFavourite = async (movie) => {
+  movie = { movie: movie };
   try {
     const res = await fetch("http://localhost:5000/favourites", {
       method: "POST",

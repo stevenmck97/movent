@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FavouriteSchema = new Schema({
-  favourite: { type: Object, required: true },
+  favourite: { movie: { type: Object }, tv: { type: Object } },
 });
 
 FavouriteSchema.virtual("url").get(function () {

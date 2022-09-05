@@ -7,6 +7,7 @@ import {
   getMovieReviews,
   getSimilarMovies,
 } from "../api/tmdb";
+import { addFavourite } from "../api/server";
 import MovieCard from "../components/MovieCard";
 import Box from "@mui/material/Box";
 import { roundToOneDec } from "../utils/voteRound";
@@ -26,8 +27,13 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
     getSimilarMovies(id).then((movies) => setSimilar(movies));
     getMovieReviews(id).then((reviews) => setReviews(reviews));
     getMovieActors(id).then((actors) => setPeople(actors));
+
+    if (faveMovies.length > 0) {
+      addFavourite(...faveMovies);
+    }
+
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [id, faveMovies]);
   //   console.log(details);
 
   const handleFaveClick = () => {
