@@ -13,7 +13,9 @@ var app = express();
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 const mongoose = require("mongoose");
-const mongoDB = process.env.MONGO_DB;
+const mongoDB =
+  process.env.MONGO_DB ||
+  "mongodb+srv://steven-dbadmin:6XXOyEsubmpjcQFw@cluster0.olldy0d.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
