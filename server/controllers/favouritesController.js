@@ -33,3 +33,15 @@ exports.favourite_id = function (req, res, next) {
     }
   );
 };
+
+exports.favourite_delete = function (req, res, next) {
+  Favourites.findOneAndDelete(
+    { "favourite.movie.id": parseInt(req.params.id) },
+    function (err, favourite) {
+      if (err) {
+        return next(err);
+      }
+      res.json(favourite);
+    }
+  );
+};
