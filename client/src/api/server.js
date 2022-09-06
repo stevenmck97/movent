@@ -38,3 +38,15 @@ export const getFavourite = async (id) => {
     throw error;
   }
 };
+
+export const deleteFavourite = async (id) => {
+  try {
+    const res = await fetch(`http://localhost:5000/favourites/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
