@@ -11,6 +11,7 @@ import Search from "./components/Search";
 function App() {
   const [faveMovies, setFaveMovies] = useState([]);
   const [faveTvShows, setFaveTvShows] = useState([]);
+  const [faveTracker, setFaveTracker] = useState([]);
 
   return (
     <div className="App">
@@ -39,6 +40,8 @@ function App() {
               <MovieDetail
                 faveMovies={faveMovies}
                 setFaveMovies={setFaveMovies}
+                faveTracker={faveTracker}
+                setFaveTracker={setFaveTracker}
               />
             }
           />
@@ -61,6 +64,8 @@ function App() {
                 setFaveMovies={setFaveMovies}
                 faveTvShows={faveTvShows}
                 setFaveTvShows={setFaveTvShows}
+                faveTracker={faveTracker}
+                setFaveTracker={setFaveTracker}
               />
             }
           />

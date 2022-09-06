@@ -7,7 +7,7 @@ const FavouriteSchema = new Schema({
 });
 
 FavouriteSchema.virtual("url").get(function () {
-  return "/favourites/" + this._id;
+  return "/favourites/" + this.favourite.movie.id;
 });
 
 module.exports = mongoose.model("Favourite", FavouriteSchema);

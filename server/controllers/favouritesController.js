@@ -22,3 +22,14 @@ exports.favourite_create = function (req, res, next) {
     res.json(favourite);
   });
 };
+
+exports.favourite_id = function (req, res, next) {
+  Favourites.find({ "favourite.movie.id": parseInt(req.params.id) }).exec(
+    function (err, favourite) {
+      if (err) {
+        return next(err);
+      }
+      res.json(favourite);
+    }
+  );
+};

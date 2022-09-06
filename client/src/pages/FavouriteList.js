@@ -4,8 +4,7 @@ import TvShowCard from "../components/TvShowCard";
 import { getFavouritesList } from "../api/server";
 
 /*
-In the database, separate the favourites list into two lists, one for movies and one for tv shows.
-Set movie state to movie db collection and tv state to tv db collection.
+Make different state variable to keep track of what is in favourites list
 */
 
 const FavouriteList = ({

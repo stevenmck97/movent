@@ -7,7 +7,7 @@ import {
   getMovieReviews,
   getSimilarMovies,
 } from "../api/tmdb";
-import { addFavourite } from "../api/server";
+import { addFavourite, getFavourite } from "../api/server";
 import MovieCard from "../components/MovieCard";
 import Box from "@mui/material/Box";
 import { roundToOneDec } from "../utils/voteRound";
@@ -18,6 +18,9 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [people, setPeople] = useState({ cast: [] });
+  const [fave, setFave] = useState({});
+  const [isInDb, setIsInDb] = useState({});
+  const [readyToAdd, setReadyToAdd] = useState(false);
   const { title, poster_path, overview, genres, vote_average } = details;
 
   const { id } = useParams();
@@ -27,25 +30,29 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
     getSimilarMovies(id).then((movies) => setSimilar(movies));
     getMovieReviews(id).then((reviews) => setReviews(reviews));
     getMovieActors(id).then((actors) => setPeople(actors));
+    getFavourite(id).then((fave) => setIsInDb(fave));
 
-    if (faveMovies.length > 0) {
-      addFavourite(...faveMovies);
+    if (readyToAdd) {
+      addFavourite(fave);
+      setReadyToAdd(false);
     }
 
     window.scrollTo(0, 0);
-  }, [id, faveMovies]);
+  }, [id, faveMovies, fave, readyToAdd]);
   //   console.log(details);
+  // console.log(isInDb);
 
   const handleFaveClick = () => {
-    if (!faveMovies.find((obj) => obj.id === details.id)) {
-      setFaveMovies([...faveMovies, details]);
-    } else return;
-
-    // setFaveMovies([...faveMovies, details]);
+    if (!isInDb.length > 0) {
+      setReadyToAdd(true);
+      setFave(details);
+    } else console.log("already in db");
   };
 
   const handleRemoveClick = () => {
-    setFaveMovies(faveMovies.filter((obj) => obj.id !== details.id));
+    setFaveMovies(
+      faveMovies.filter((obj) => obj.favourite.movie.id !== details.id)
+    );
   };
 
   return (
@@ -64,7 +71,7 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
         {title ? title : <p>Title not found</p>} {roundToOneDec(vote_average)}
       </h2>
       <p>{overview}</p>
-      {faveMovies.find((obj) => obj.id === details.id) ? (
+      {faveMovies.find((obj) => obj.favourite.movie.id === details.id) ? (
         <button onClick={handleRemoveClick}>Remove from Faves</button>
       ) : (
         <button onClick={handleFaveClick}>Add to Faves</button>
