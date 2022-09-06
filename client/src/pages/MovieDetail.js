@@ -7,7 +7,7 @@ import {
   getMovieReviews,
   getSimilarMovies,
 } from "../api/tmdb";
-import { addFavourite, getFavourite } from "../api/server";
+import { addFavourite, getFavourite, deleteFavourite } from "../api/server";
 import MovieCard from "../components/MovieCard";
 import Box from "@mui/material/Box";
 import { roundToOneDec } from "../utils/voteRound";
@@ -21,6 +21,7 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
   const [fave, setFave] = useState({});
   const [isInDb, setIsInDb] = useState({});
   const [readyToAdd, setReadyToAdd] = useState(false);
+  const [readyToDelete, setReadyToDelete] = useState(false);
   const { title, poster_path, overview, genres, vote_average } = details;
 
   const { id } = useParams();
@@ -37,8 +38,13 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
       setReadyToAdd(false);
     }
 
+    if (readyToDelete) {
+      deleteFavourite(id);
+      setReadyToDelete(false);
+    }
+
     window.scrollTo(0, 0);
-  }, [id, faveMovies, fave, readyToAdd]);
+  }, [id, faveMovies, fave, readyToAdd, readyToDelete]);
   //   console.log(details);
   // console.log(isInDb);
 
@@ -50,9 +56,7 @@ const MovieDetail = ({ faveMovies, setFaveMovies }) => {
   };
 
   const handleRemoveClick = () => {
-    setFaveMovies(
-      faveMovies.filter((obj) => obj.favourite.movie.id !== details.id)
-    );
+    setReadyToDelete(true);
   };
 
   return (
