@@ -14,7 +14,7 @@ const FavouriteList = ({
   setFaveTvShows,
 }) => {
   const [currentList, setCurrentList] = useState([]);
-  const [dbFaveMovies, setDbFaveMovies] = useState([]);
+  // const [dbFaveMovies, setDbFaveMovies] = useState([]);
 
   useEffect(() => {
     const getFavourites = async () => {
