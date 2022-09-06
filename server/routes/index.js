@@ -10,5 +10,6 @@ router.get("/", function (req, res, next) {
 router.get("/favourites", favourites_controller.favourites_list);
 router.post("/favourites", favourites_controller.favourite_create);
 router.get("/favourites/:id", favourites_controller.favourite_id);
+router.delete("/favourites/:id", favourites_controller.favourite_delete);
 
 module.exports = router;
