@@ -4,6 +4,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "./.env" });
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -14,9 +17,7 @@ var app = express();
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 const mongoose = require("mongoose");
-const mongoDB =
-  process.env.MONGO_DB ||
-  "mongodb+srv://steven-dbadmin:6XXOyEsubmpjcQFw@cluster0.olldy0d.mongodb.net/?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGO_DB;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
