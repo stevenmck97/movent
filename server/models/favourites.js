@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FavouriteSchema = new Schema({
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   favourite: { movie: { type: Object }, tv: { type: Object } },
 });
 
