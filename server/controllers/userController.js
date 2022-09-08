@@ -53,6 +53,20 @@ exports.loginUser = asyncHandler(async function (req, res) {
   }
 });
 
+exports.currentUser = asyncHandler(async function (req, res) {
+  const user = await User.findById(req.user.id);
+  if (user) {
+    res.json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
 function generateToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 }
