@@ -22,7 +22,12 @@ exports.registerUser = asyncHandler(async function (req, res) {
 
   const user = await User.create({ email, password: hashedPassword, name });
   if (user) {
-    res.status(201);
+    res.status(201).json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
   } else {
     res.status(400);
     throw new Error("Invalid user data");
@@ -37,12 +42,17 @@ exports.loginUser = asyncHandler(async function (req, res) {
 
   if (user && isMatch) {
     res.json({
-      _id: user._id,
+      _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user._id),
     });
   } else {
     res.status(401);
     throw new Error("Invalid email or password");
   }
 });
+
+function generateToken(id) {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
+}
