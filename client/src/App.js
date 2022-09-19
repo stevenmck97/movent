@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { useState } from "react";
 import FavouriteList from "./pages/FavouriteList";
 import Search from "./components/Search";
+import Register from "./pages/Register";
 
 function App() {
   const [faveMovies, setFaveMovies] = useState([]);
@@ -30,6 +31,9 @@ function App() {
         </Link>
         <Link to="/favourites">
           <p>Click here to see your Favourites</p>
+        </Link>
+        <Link to="/register">
+          <p>Register</p>
         </Link>
         <Routes>
           <Route path="/" />
@@ -69,6 +73,7 @@ function App() {
               />
             }
           />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>
