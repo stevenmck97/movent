@@ -4,7 +4,7 @@ import PersonDetail from "./pages/PersonDetail";
 import TvList from "./pages/TvList";
 import TvDetail from "./pages/TvDetails";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FavouriteList from "./pages/FavouriteList";
 import Search from "./components/Search";
 import Register from "./pages/Register";
@@ -13,6 +13,15 @@ function App() {
   const [faveMovies, setFaveMovies] = useState([]);
   const [faveTvShows, setFaveTvShows] = useState([]);
   const [faveTracker, setFaveTracker] = useState([]);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setIsAuthorized(true);
+      setToken(JSON.parse(localStorage.getItem("user")).token);
+    }
+  }, [isAuthorized]);
 
   return (
     <div className="App">
@@ -32,11 +41,15 @@ function App() {
         <Link to="/favourites">
           <p>Click here to see your Favourites</p>
         </Link>
-        <Link to="/register">
-          <p>Register</p>
-        </Link>
+
+        {isAuthorized ? null : (
+          <Link to="/register">
+            <p>Register</p>
+          </Link>
+        )}
+
         <Routes>
-          <Route path="/" />
+          <Route path={isAuthorized ? "/" : "/register"} />
           <Route path="/movies" element={<MovieList />} />
           <Route
             path="/movies/:id"
@@ -73,7 +86,11 @@ function App() {
               />
             }
           />
-          <Route path="/register" element={<Register />} />
+          {isAuthorized ? (
+            console.log("You are authorized")
+          ) : (
+            <Route path="/register" element={<Register />} />
+          )}
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { registerUser } from "../api/serverAuth";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,17 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const [authData, setAuthData] = useState({});
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (isReady) {
+      registerUser(formData).then((data) => setAuthData(data));
+    }
+  }, [isReady, formData]);
+
+  console.log(authData);
 
   const { name, email, password, confirmPassword } = formData;
 
@@ -17,9 +29,9 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      console.log("Passwords do not match");
+      alert("Passwords do not match");
     } else {
-      console.log(formData);
+      setIsReady(true);
     }
   };
 
