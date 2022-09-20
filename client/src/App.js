@@ -58,7 +58,7 @@ function App() {
           </Link>
         )}
 
-        {isAuthorized ? <Logout /> : null}
+        {isAuthorized ? <Logout setIsAuthorized={setIsAuthorized} /> : null}
 
         <Routes>
           <Route path="/" />
@@ -101,13 +101,19 @@ function App() {
           {isAuthorized ? (
             console.log("You are authorized")
           ) : (
-            <Route path="/register" element={<Register />} />
+            <Route
+              path="/register"
+              element={<Register setIsAuthorized={setIsAuthorized} />}
+            />
           )}
 
           {isAuthorized ? (
             console.log("You are authorized")
           ) : (
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={<Login setIsAuthorized={setIsAuthorized} />}
+            />
           )}
         </Routes>
       </BrowserRouter>

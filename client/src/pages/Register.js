@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { registerUser } from "../api/serverAuth";
 
-const Register = () => {
+const Register = ({ isAuthorized }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,7 +16,7 @@ const Register = () => {
     if (isReady) {
       registerUser(formData).then((data) => setAuthData(data));
     }
-  }, [isReady, formData]);
+  }, [isReady, formData, isAuthorized]);
 
   const { name, email, password, confirmPassword } = formData;
 
@@ -30,6 +30,7 @@ const Register = () => {
       alert("Passwords do not match");
     } else {
       setIsReady(true);
+      window.location.reload();
     }
   };
 

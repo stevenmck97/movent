@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { loginUser } from "../api/serverAuth";
 
-const Login = () => {
+const Login = ({ isAuthorized }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,7 +14,7 @@ const Login = () => {
       loginUser(formData);
       setIsReady(false);
     }
-  }, [isReady, formData]);
+  }, [isReady, formData, isAuthorized]);
 
   const { email, password } = formData;
 
@@ -25,6 +25,7 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     setIsReady(true);
+    window.location.reload();
   };
 
   return (
