@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
+import { loginUser } from "../api/serverAuth";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (isReady) {
+      loginUser(formData);
+      setIsReady(false);
+    }
+  }, [isReady, formData]);
 
   const { email, password } = formData;
 
@@ -14,6 +24,7 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setIsReady(true);
   };
 
   return (
@@ -41,7 +52,7 @@ const Login = () => {
           />
         </div>
         <div className="form-group">
-          <input type="submit" value="Register" />
+          <input type="submit" value="Login" />
         </div>
       </form>
     </div>

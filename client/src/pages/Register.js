@@ -18,8 +18,6 @@ const Register = () => {
     }
   }, [isReady, formData]);
 
-  console.log(authData);
-
   const { name, email, password, confirmPassword } = formData;
 
   const onChange = (e) => {
