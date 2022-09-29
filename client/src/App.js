@@ -10,6 +10,7 @@ import Search from "./components/Search";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Logout from "./components/Logout";
+import { AppBar, Toolbar } from "@mui/material";
 
 function App() {
   const [faveMovies, setFaveMovies] = useState([]);
@@ -32,34 +33,37 @@ function App() {
       <h1>Welcome to MovEnt!</h1>
 
       <BrowserRouter>
-        <Search />
-        <Link to="/">
-          <p>Return to Home</p>
-        </Link>
-        <Link to="/movies">
-          <p>Click here to see Movies!</p>
-        </Link>
-        <Link to="/tv">
-          <p>Click here to see TV Shows!</p>
-        </Link>
-        <Link to="/favourites">
-          <p>Click here to see your Favourites</p>
-        </Link>
+        <AppBar position="static">
+          <Toolbar>
+            <Search />
+            <Link to="/">
+              <p>Return to Home</p>
+            </Link>
+            <Link to="/movies">
+              <p>Click here to see Movies!</p>
+            </Link>
+            <Link to="/tv">
+              <p>Click here to see TV Shows!</p>
+            </Link>
+            <Link to="/favourites">
+              <p>Click here to see your Favourites</p>
+            </Link>
 
-        {isAuthorized ? null : (
-          <Link to="/register">
-            <p>Register</p>
-          </Link>
-        )}
+            {isAuthorized ? null : (
+              <Link to="/register">
+                <p>Register</p>
+              </Link>
+            )}
 
-        {isAuthorized ? null : (
-          <Link to="/login">
-            <p>Login</p>
-          </Link>
-        )}
+            {isAuthorized ? null : (
+              <Link to="/login">
+                <p>Login</p>
+              </Link>
+            )}
 
-        {isAuthorized ? <Logout setIsAuthorized={setIsAuthorized} /> : null}
-
+            {isAuthorized ? <Logout setIsAuthorized={setIsAuthorized} /> : null}
+          </Toolbar>
+        </AppBar>
         <Routes>
           <Route path="/" />
           <Route path="/movies" element={<MovieList />} />
